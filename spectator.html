@@ -1,0 +1,58 @@
+{{debug}}
+<div id="spectator-page" class="uk-grid">
+  <!-- Vertical Nav -->
+  <div class="uk-width-2-10">
+
+    <!-- Panel Box -->
+    <div class="uk-panel uk-panel-box uk-height-viewport">
+
+      <!-- Profile Area -->
+      <h3 class="uk-text-center"><img src="{{user.photoURL}}" border="1"></img></h3>
+      <p class="uk-text-center uk-text-small">{{user.name}}</p>
+      <p class="uk-text-center">Lorem ipsum dolor sit amet, consetetur sadipscing elitr. </p>
+
+      <hr>
+
+      <!-- Credits Area -->
+      <p class="uk-text-center">Available Credits: {{user.credits}}</p>
+
+      <hr>
+
+      <!-- Accordions-->
+      <ul class="uk-nav uk-nav-parent-icon uk-nav-side" data-uk-nav="{multiple:true}">
+        <li class="uk-parent"><a href="#">Competition Detail</a>
+          <ul class="uk-nav-sub">
+            <li>
+              <div class="uk-panel uk-panel-box">
+                Rules:<br>
+                Details:<br>
+              </div>
+            </li>
+          </ul>
+        </li>
+        <li class="uk-parent"><a href="#">Performers</a>
+          <ul id="performers" class="uk-nav-sub">
+          {{#each performers}}
+            <li><a href="#performer/{{uid}}">{{name}}</a></li>
+          {{/each}}
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+  <!-- Main Area -->
+  <div class="uk-width-8-10">
+
+    <div class="uk-grid">
+      <div class="uk-width-1-2">
+        <div id="spectator_panel1" class="uk-panel"></div>
+      </div>
+      <div class="uk-width-1-2">
+        <div id="spectator_panel2" class="uk-panel"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

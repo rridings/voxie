@@ -3,23 +3,46 @@ if (typeof window.location.origin === "undefined"){
     window.location.origin = window.location.protocol + "//" + window.location.host;
 }
 
+if ( !sessionStorage.authState ) {
+  sessionStorage.authState = "NOT_AUTHENICATED"
+}
+  
+Handlebars.registerHelper("debug", function(optionalValue) {
+  console.log("Current Context");
+  console.log("====================");
+  console.log(this);
+ 
+  if (optionalValue) {
+    console.log("Value");
+    console.log("====================");
+    console.log(optionalValue);
+  }
+});
+
 // Utility (helper) functions
 var utils = {
 
     // Finds a handlebars template by id.
     // Populates it with the passed in data
-    // Appends the generated html to div#order-page-container
-    renderPageTemplate: function(templateId, data) {
+    // Appends the generated html to supplied container
+    renderPageTemplate: function(html, data, container) {
         var _data = data || {};
-        var templateScript = $(templateId).html();
-        var template = Handlebars.compile(templateScript);
+        
+        // Hide whatever page is currently shown.
+        $(container)
+            .find(".active")
+                .hide()
+                    .removeClass("active");
+        
+        $.get(html, function( templateScript ) {
+              var template = Handlebars.compile(templateScript);
 
+          // Empty the container and append new content
+          $(container).empty();
 
-        // Empty the container and append new content
-        $("#page-container").empty();
-
-        // Empty the container and append new content
-        $("#page-container").append(template(_data));
+          // Empty the container and append new content
+          $(container).append(template(_data));
+        }, 'html'); 
     },
 
     // If a hash can not be found in routes
@@ -81,18 +104,15 @@ var router = {
     // and calls the function with that name
     // in the routes
     render: function() {
-
+        if ( sessionStorage.authState != "AUTHENICATED" ) {
+            window.location.hash = "#login";
+        }
+          
         // Get the keyword from the url.
         var keyName = window.location.hash.split("/")[0];
 
         // Grab anything after the hash
         var url = window.location.hash;
-
-        // Hide whatever page is currently shown.
-        $("#page-container")
-            .find(".active")
-                .hide()
-                    .removeClass("active");
 
         // Call the the function
         // by key name
@@ -110,19 +130,46 @@ var router = {
 var spaRoutes = {
 
     // Default route (home page)
-    "#home": function(url) {
-        console.log('home was called...');
-        utils.renderPageTemplate("#home-page-template");
+    "#spectator": function(url) {
+        console.log('spectator was called...');
+        var data = new Object;
+        data.template = "spectator.html";
+        data.container = "#page-container";
+        spectator.init(data, renderPage);
     },
-    "#about": function(url) {
-        console.log('about was called...');
-        utils.renderPageTemplate("#about-page-template");
+    "#role": function(url) {
+        console.log('role was called...');
+        var data = new Object;
+        data.template = "role.html";
+        data.container = "#page-container";
+        role.init(data, renderPage);
     },
-    "#contact": function(url) {
-        console.log('contact was called...');
-        utils.renderPageTemplate("#contact-page-template");
+    "#login": function(url) {
+        console.log('login was called...');
+        var data = new Object;
+        data.template = "login.html";
+        data.container = "#page-container";
+        login.init(data, renderPage);
+    },
+    "#performer": function(url) {
+        console.log('performer was called...');
+        var data = new Object;
+        data.template = "performer.html";
+        data.container = "#spectator_panel1";
+        var uid = window.location.hash.split("/")[1];
+        data.uid = uid;
+        performer.init(data, renderPage);
     }
 };
+
+var renderPage = function (data) {
+  if ( sessionStorage.user != null ) {
+    var user = JSON.parse(sessionStorage.user);
+    data.user = user;
+  }
+  
+  utils.renderPageTemplate(data.template, data, data.container);
+}
 
 // Create a new instance of the router
 var spaRouter = $.extend({}, router, {
@@ -130,4 +177,4 @@ var spaRouter = $.extend({}, router, {
 });
 
 spaRouter.init();
-window.location.hash = "#home";
+window.location.hash = "#spectator";
