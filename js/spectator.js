@@ -17,13 +17,8 @@ var spectator = function() {
       callback(data);
     });
   }
-    
-  var findPerformer = function(uid) {
-    window.location.hash = "#performer/" + uid; 
-  }
   
   return {
-	  init : init,
-	  findPerformer : findPerformer
+	  init : init
   }
 }();

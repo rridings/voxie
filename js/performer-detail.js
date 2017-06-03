@@ -1,4 +1,4 @@
-var performer = function() {
+var performerdetail = function() {
   "use strict";
 
   var init = function (data, callback) {

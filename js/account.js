@@ -1,27 +1,34 @@
-var writeUser = function(user) {
-  var userRef = firebase.database().ref('users/' + user.uid)
+var account = function() {
+
+  var writeUser = function(user) {
+    var userRef = firebase.database().ref('users/' + user.uid)
  
-  for (var key in user) {
-    userRef.child(key).set(user[key]);
-  }
-}
+    for (var key in user) {
+      userRef.child(key).set(user[key]);
+    }
+  };
 
-var readUser = function readUserData(user, callback) {
-  return firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
-    console.log(snapshot.val());
-    var dbUser = snapshot.val();
+  var readUser = function readUserData(user, callback) {
+    return firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
+      console.log(snapshot.val());
+      var dbUser = snapshot.val();
     
-    callback(user, dbUser);
-  });
-}
+      callback(user, dbUser);
+    });
+  };
 
-var updateUserRole = function updateUserRole(role) {
-  var user = JSON.parse(sessionStorage.user);
+  var updateUserRole = function updateUserRole(role) {
+    var user = JSON.parse(sessionStorage.user);
    
-  user.role = role;
+    user.role = role;
   
-  writeUser(user);
-  
-  window.location.hash = "#spectator"; 
-}  
+    writeUser(user);
+  };
+
+  return {
+	  writeUser : writeUser,
+	  readUser : readUser,
+	  updateUserRole : updateUserRole 
+  }
+}();
   

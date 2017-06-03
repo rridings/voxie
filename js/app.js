@@ -151,14 +151,14 @@ var spaRoutes = {
         data.container = "#page-container";
         login.init(data, renderPage);
     },
-    "#performer": function(url) {
-        console.log('performer was called...');
+    "#performer-detail": function(url) {
+        console.log('performer-detail was called...');
         var data = new Object;
-        data.template = "performer.html";
+        data.template = "performer-detail.html";
         data.container = "#spectator_panel1";
         var uid = window.location.hash.split("/")[1];
         data.uid = uid;
-        performer.init(data, renderPage);
+        performerdetail.init(data, renderPage);
     }
 };
 
