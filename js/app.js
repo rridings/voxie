@@ -159,6 +159,13 @@ var spaRoutes = {
         var uid = window.location.hash.split("/")[1];
         data.uid = uid;
         performerdetail.init(data, renderPage);
+    },
+    "#performer-video": function(url) {
+        console.log('performer-video was called...');
+        var data = new Object;
+        data.template = "performer-video.html";
+        data.container = "#spectator_panel2";
+        performerdetail.init(data, renderPage);
     }
 };
 
@@ -169,12 +176,25 @@ var renderPage = function (data) {
   }
   
   utils.renderPageTemplate(data.template, data, data.container);
+  if ( data.template == "performer-video.html" ) {
+    reloadJs("js/video.js");
+  }
 }
 
 // Create a new instance of the router
 var spaRouter = $.extend({}, router, {
     routes: spaRoutes
 });
+
+function reloadJs(src) {
+$.getScript(src, function(data, textStatus, jqxhr) {
+  console.log(data); //data returned
+  console.log(textStatus); //success
+  console.log(jqxhr.status); //200
+  console.log('Load was performed.');
+});
+
+}
 
 spaRouter.init();
 window.location.hash = "#spectator";
