@@ -165,7 +165,9 @@ var spaRoutes = {
         var data = new Object;
         data.template = "performer-video.html";
         data.container = "#spectator_panel2";
-        performerdetail.init(data, renderPage);
+        var uid = window.location.hash.split("/")[1];
+        data.uid = uid;
+        performervideo.init(data, renderPage);
     }
 };
 

@@ -1,38 +1,9 @@
-
+  {{#each videos}}
   <article class="video">
     <figure>
-      <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/oVvS15Gpij0">
-      <img class="videoThumb" src="//i1.ytimg.com/vi/oVvS15Gpij0/mqdefault.jpg"></a>
+      <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/{{url}}">
+      <img class="videoThumb" src="//i1.ytimg.com/vi/{{url}}/mqdefault.jpg"></a>
     </figure>
-    <h2 class="videoTitle">First Round</h2>
-  </article>
-  <article class="video">
-    <figure>
-      <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/BuyGVhQFLbs">
-      <img class="videoThumb" src="//i1.ytimg.com/vi/BuyGVhQFLbs/mqdefault.jpg"></a>
-    </figure>
-    <h2 class="videoTitle">Second Round</h2>
-  </article>
-  <article class="video">
-    <figure>
-      <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/7e9DSdkRQu4">
-      <img class="videoThumb" src="//i1.ytimg.com/vi/7e9DSdkRQu4/mqdefault.jpg"></a>
-    </figure>
-    <h2 class="videoTitle">Third Round</h2>
-  </article>
-
-<!--
-<div>
-<iframe title="YouTube video player" class="youtube-player" type="text/html" 
-width="240" height="160" src="https://www.youtube.com/embed/oVvS15Gpij0"
-frameborder="0" allowFullScreen></iframe>
-<br>
-<iframe title="YouTube video player" class="youtube-player" type="text/html" 
-width="240" height="160" src="https://www.youtube.com/embed/BuyGVhQFLbs"
-frameborder="0" allowFullScreen></iframe>
-<br>
-<iframe title="YouTube video player" class="youtube-player" type="text/html" 
-width="240" height="160" src="https://www.youtube.com/embed/7e9DSdkRQu4"
-frameborder="0" allowFullScreen></iframe>
-</div>
--->
+    <h2 class="videoTitle">{{caption}}</h2>
+  </article>         
+  {{/each}}
