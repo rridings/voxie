@@ -1,9 +1,13 @@
 /* First make sure the video thumbnail images are responsive. */
-    img {
-      max-width: 100%;
-      height: auto;
-    }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 
+  .videoTitle {
+    font-size:medium;
+  }
+  
   /* 
   This is the starting grid for each video with thumbnails 5 across for the largest screen size.
   It's important to use percentages or there may be gaps on the right side of the page. 
@@ -12,7 +16,6 @@
     background: #fff;
     padding-bottom: 20px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
-    width: 25%; /* Thumbnails 5 across */
     margin: 1%;
     float: left;
     text-align: center
@@ -22,7 +25,7 @@
    Each can have thumbnail sizes that vary by 1px and are likely break your layout. */
   .video figure {
     height: 0;
-    padding-bottom: 60%;
+    padding-bottom: 50%;
 
   /* Media Queries - This is the responsive grid. */
   @media (max-width: 1366px) {

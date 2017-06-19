@@ -1,9 +1,11 @@
+<div uk-grid>
   {{#each videos}}
-  <article class="video">
+  <div class="video">
     <figure>
       <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/{{url}}">
       <img class="videoThumb" src="//i1.ytimg.com/vi/{{url}}/mqdefault.jpg"></a>
     </figure>
     <h2 class="videoTitle">{{caption}}</h2>
-  </article>         
+  </div>         
   {{/each}}
+</div>
