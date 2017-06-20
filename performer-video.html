@@ -2,10 +2,33 @@
   {{#each videos}}
   <div class="video">
     <figure>
-      <a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/{{url}}">
-      <img class="videoThumb" src="//i1.ytimg.com/vi/{{url}}/mqdefault.jpg"></a>
+      <!--<a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/{{url}}">-->
+      <a href="#video-play" uk-toggle>
+      <img class="videoThumb" id="video{{url}}" src="//i1.ytimg.com/vi/{{url}}/mqdefault.jpg"></a>
     </figure>
     <h2 class="videoTitle">{{caption}}</h2>
+    <script>
+    $('#video{{url}}').on({
+      'click': function(){
+        $('#videoframe').attr('src','https://www.youtube.com/embed/{{url}}?enablejsapi=1');
+      }
+    });
+    </script>
   </div>         
   {{/each}}
 </div>
+
+<div id="video-play" uk-modal>
+        <div class="uk-modal-dialog">
+            <div class="uk-modal-header">
+              <div id="video-container" class="video-container">
+                <iframe id="videoframe" width="560" height="315" src="#" frameborder="0" allowfullscreen></iframe>
+              </div>
+            </div>
+
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-flat uk-modal-close" onClick="javascript:performervideo.pauseVideo()">Close</button>
+            </div>
+        </div>
+</div>
+

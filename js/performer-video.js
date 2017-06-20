@@ -17,8 +17,15 @@ var performervideo = function() {
     });
   }
    
+  var pauseVideo = function() {
+    var div = document.getElementById("video-container");
+    var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+    iframe.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+  }
+  
   return {
-	  init : init
+	  init : init,
+	  pauseVideo : pauseVideo
   }
 }();
 

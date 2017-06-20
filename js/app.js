@@ -178,10 +178,6 @@ var renderPage = function (data) {
   }
   
   utils.renderPageTemplate(data.template, data, data.container);
-  if ( data.template == "performer-video.html" ) {
-    reloadJs("js/video.js");
-    reloadJs("js/uikit.min.js");
-  }
 }
 
 // Create a new instance of the router
