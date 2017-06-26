@@ -14,7 +14,8 @@ var spectator = function() {
       });
     
       data.performers = performers;
-      callback(data);
+      
+      callback(data)
     });
   }
   

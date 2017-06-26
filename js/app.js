@@ -135,6 +135,7 @@ var spaRoutes = {
         var data = new Object;
         data.template = "spectator.html";
         data.container = "#page-container";
+        data.currentUser = getUser();
         spectator.init(data, renderPage);
     },
     "#role": function(url) {
@@ -142,6 +143,7 @@ var spaRoutes = {
         var data = new Object;
         data.template = "role.html";
         data.container = "#page-container";
+        data.currentUser = getUser();
         role.init(data, renderPage);
     },
     "#login": function(url) {
@@ -149,6 +151,7 @@ var spaRoutes = {
         var data = new Object;
         data.template = "login.html";
         data.container = "#page-container";
+        data.currentUser = getUser();
         login.init(data, renderPage);
     },
     "#performer-detail": function(url) {
@@ -156,6 +159,7 @@ var spaRoutes = {
         var data = new Object;
         data.template = "performer-detail.html";
         data.container = "#spectator_panel1";
+        data.currentUser = getUser();
         var uid = window.location.hash.split("/")[1];
         data.uid = uid;
         performerdetail.init(data, renderPage);
@@ -165,6 +169,7 @@ var spaRoutes = {
         var data = new Object;
         data.template = "performer-video.html";
         data.container = "#spectator_panel2";
+        data.currentUser = getUser();
         var uid = window.location.hash.split("/")[1];
         data.uid = uid;
         performervideo.init(data, renderPage);
@@ -185,14 +190,23 @@ var spaRouter = $.extend({}, router, {
     routes: spaRoutes
 });
 
-function reloadJs(src) {
-$.getScript(src, function(data, textStatus, jqxhr) {
-  console.log(data); //data returned
-  console.log(textStatus); //success
-  console.log(jqxhr.status); //200
-  console.log('Load was performed.');
-});
+var reloadJs = function (src) {
+  $.getScript(src, function(data, textStatus, jqxhr) {
+    console.log(data); //data returned
+    console.log(textStatus); //success
+    console.log(jqxhr.status); //200
+    console.log('Load was performed.'); 
+  });
+}
 
+var getUser = function () {
+  var user = null;
+  
+  if ( sessionStorage.user != null ) {
+    user = JSON.parse(sessionStorage.user);
+  }
+  
+  return user;
 }
 
 spaRouter.init();

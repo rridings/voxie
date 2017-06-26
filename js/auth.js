@@ -38,8 +38,9 @@ var auth = function() {
       user.email = result.user.email;
       user.photoURL = result.user.photoURL;
       
-      window.location.hash = "#spectator";
       account.readUser(user, findUserCallback);
+            
+      window.location.hash = "#spectator";
     }
   }).catch(function(error) {
     sessionStorage.authState = "NOT_AUTHENICATED";
@@ -67,13 +68,14 @@ var auth = function() {
       user = dbUser;
     }
   
+    sessionStorage.user = JSON.stringify(user);
+      
     if ( user.role != null ) {
       window.location.hash = "#spectator";    
     } 
     else {
       window.location.hash = "#role";
     }
-    sessionStorage.user = JSON.stringify(user);
   };
   
   return {

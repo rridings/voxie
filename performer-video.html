@@ -2,7 +2,6 @@
   {{#each videos}}
   <div class="video">
     <figure>
-      <!--<a class="fancybox fancybox.iframe" href="//www.youtube.com/embed/{{url}}">-->
       <a href="#video-play" uk-toggle>
       <img class="videoThumb" id="video{{url}}" src="//i1.ytimg.com/vi/{{url}}/mqdefault.jpg"></a>
     </figure>
@@ -11,6 +10,8 @@
     $('#video{{url}}').on({
       'click': function(){
         $('#videoframe').attr('src','https://www.youtube.com/embed/{{url}}?enablejsapi=1');
+        $('#videoframe').attr('url','{{url}}');
+        // find vote and check radio button
       }
     });
     </script>
@@ -27,8 +28,20 @@
             </div>
 
             <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-flat uk-modal-close" onClick="javascript:performervideo.pauseVideo()">Close</button>
+              <div id="vote" class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>
+                <label><input class="uk-radio" type="radio" name="radio2" value="1"> 1</label>
+                <label><input class="uk-radio" type="radio" name="radio2" value="2"> 2</label>
+                <label><input class="uk-radio" type="radio" name="radio2" value="3"> 3</label>
+                <label><input class="uk-radio" type="radio" name="radio2" value="4"> 4</label>
+                <label><input class="uk-radio" type="radio" name="radio2" value="5"> 5</label>
+              </div>
+              <button type="button" class="md-btn md-btn-flat uk-modal-close" onClick="javascript:performervideo.pauseVideo()">Close</button>
             </div>
         </div>
 </div>
 
+<script>
+  $('#vote input:radio').click(function() {
+    performervideo.vote('{{currentUser.uid}}', $(videoframe).attr("url"), $(this).val()); 
+  });
+</script>
