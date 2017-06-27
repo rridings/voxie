@@ -1,4 +1,7 @@
 <div uk-grid>
+  <script>
+    var uid = '{{currentUser.uid}}';
+  </script>
   {{#each videos}}
   <div class="video">
     <figure>
@@ -11,7 +14,9 @@
       'click': function(){
         $('#videoframe').attr('src','https://www.youtube.com/embed/{{url}}?enablejsapi=1');
         $('#videoframe').attr('url','{{url}}');
+        
         // find vote and check radio button
+        performervideo.getVote(uid,'{{url}}', performervideo.updateDisplay);
       }
     });
     </script>
@@ -29,11 +34,11 @@
 
             <div class="uk-modal-footer uk-text-right">
               <div id="vote" class="uk-margin uk-grid-small uk-child-width-auto" uk-grid>
-                <label><input class="uk-radio" type="radio" name="radio2" value="1"> 1</label>
-                <label><input class="uk-radio" type="radio" name="radio2" value="2"> 2</label>
-                <label><input class="uk-radio" type="radio" name="radio2" value="3"> 3</label>
-                <label><input class="uk-radio" type="radio" name="radio2" value="4"> 4</label>
-                <label><input class="uk-radio" type="radio" name="radio2" value="5"> 5</label>
+                <label><input class="uk-radio" type="radio" id="radio1" value="1"> 1</label>
+                <label><input class="uk-radio" type="radio" id="radio2" value="2"> 2</label>
+                <label><input class="uk-radio" type="radio" id="radio3" value="3"> 3</label>
+                <label><input class="uk-radio" type="radio" id="radio4" value="4"> 4</label>
+                <label><input class="uk-radio" type="radio" id="radio5" value="5"> 5</label>
               </div>
               <button type="button" class="md-btn md-btn-flat uk-modal-close" onClick="javascript:performervideo.pauseVideo()">Close</button>
             </div>
