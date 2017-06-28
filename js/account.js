@@ -21,6 +21,9 @@ var account = function() {
     var user = JSON.parse(sessionStorage.user);
    
     user.role = role;
+    if ( role == 'performer' )  {
+      user.totalVotes = 0;
+    }
   
     writeUser(user);
   };
